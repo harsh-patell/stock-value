@@ -4,8 +4,10 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas_datareader as data
-from keras.models import load_model
-from sklearn.preprocessing import MinMaxScaler
+import keras as kr
+import sklearn as skl
+# from keras.models import load_model
+# from sklearn.preprocessing import MinMaxScaler
 
 
 # Get the stock information (scraping from Yahoo Finance)
@@ -17,7 +19,7 @@ input_ticker = st.text_input('Enter Stock Ticker', 'TSLA')
 
 
 df = data.DataReader(input_ticker, 'yahoo', start, end)
-scaler = MinMaxScaler(feature_range=(0,1))
+scaler = skl.preprocessing.MinMaxScaler(feature_range=(0,1))
 
 
 # Describe Raw Data
@@ -29,14 +31,14 @@ st.write(df.describe())
 st.subheader('Closing Price vs Time Chart')
 fig = plt.figure(figsize = (12,6))
 plt.xlabel('Time')
-plt.ylabel('Price')
+plt.ylabel('Price (USD)')
 plt.plot(df['Close'], 'b')
 st.pyplot(fig)
 
 st.subheader('Closing Price vs Time Chart with 100MA')
 ma100 = df.Close.rolling(100).mean()
 plt.xlabel('Time')
-plt.ylabel('Price')
+plt.ylabel('Price (USD)')
 plt.plot(ma100, 'g')
 plt.plot(df.Close, 'b')
 st.pyplot(fig)
@@ -44,7 +46,7 @@ st.pyplot(fig)
 st.subheader('Closing Price vs Time Chart with 100MA & 200MA')
 ma200 = df.Close.rolling(200).mean()
 plt.xlabel('Time')
-plt.ylabel('Price')
+plt.ylabel('Price (USD)')
 plt.plot(ma100, 'g')
 plt.plot(ma200, 'r')
 plt.plot(df['Close'], 'b')
@@ -60,8 +62,7 @@ print(data_testing.shape)  # Number of rows to test data on
 
 
 # Loading the LSTM Model (training our data)
-model = load_model('keras_model.h5')
-
+model = kr.models.load_model('../keras_model.h5')
 
 # Scaling the testing data after appending it to last 100 days of training data
 past_100_days = data_training.tail(100)
@@ -97,6 +98,6 @@ fig2 = plt.figure(figsize = (12,6))
 plt.plot(y_test, 'b', label="Original Price")
 plt.plot(y_predicted, 'c', label="Predicted Price")
 plt.xlabel('Time')
-plt.ylabel('Price')
+plt.ylabel('Price (USD)')
 plt.legend()
 st.pyplot(fig2)
