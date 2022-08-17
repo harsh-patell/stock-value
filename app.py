@@ -1,5 +1,5 @@
 
-import numpy as np
+import numpy as numpy
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -76,12 +76,11 @@ for i in range(100, testing_data_array.shape[0]):
     x_test.append(testing_data_array[i-100: i])
     y_test.append(testing_data_array[i, 0])
     
-x_test, y_test = np.array(x_test), np.array(y_test)
-x_train = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+x_test, y_test = numpy.array(x_test), numpy.array(y_test)
+x_train = numpy.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 # print(x_test.shape)
 # print(x_test)
 # print(y_test.shape)
-
 
 # Predictions
 y_predicted = model.predict(x_test)
