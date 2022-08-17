@@ -4,22 +4,23 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas_datareader as data
-import keras.models as kr
-import sklearn.preprocessing as skl
-# from keras.models import load_model
-# from sklearn.preprocessing import MinMaxScaler
+from datetime import datetime
+from keras.models import load_model
+from sklearn.preprocessing import MinMaxScaler
+# import keras.models as kr
+# import sklearn.preprocessing as skl
 
 
 # Get the stock information (scraping from Yahoo Finance)
 start = '2016-01-01'
-end = '2022-08-08'
+end = datetime.today().strftime('%Y-%m-%d')
 
 st.title('Stock Trend Predictor')
 input_ticker = st.text_input('Enter Stock Ticker', 'TSLA')
 
 
 df = data.DataReader(input_ticker, 'yahoo', start, end)
-scaler = skl.MinMaxScaler(feature_range=(0,1))
+scaler = MinMaxScaler(feature_range=(0,1))
 
 
 # Describe Raw Data
@@ -62,7 +63,7 @@ print(data_testing.shape)  # Number of rows to test data on
 
 
 # Loading the LSTM Model (training our data)
-model = kr.load_model('keras_model.h5')
+model = load_model('keras_model.h5')
 
 # Scaling the testing data after appending it to last 100 days of training data
 past_100_days = data_training.tail(100)

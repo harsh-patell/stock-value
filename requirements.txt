@@ -8,3 +8,4 @@ pandas_datareader == 0.10.0
 scikit_learn == 1.1.2
 streamlit == 1.11.1
 tensorflow == 2.9.1
+DateTime == 4.5
