@@ -7,7 +7,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas_datareader as data
 from datetime import datetime
-from bs4 import BeautifulSoup
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 # import keras.models as kr
