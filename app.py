@@ -6,11 +6,11 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas_datareader as data
+import yfinance as yf
 from datetime import datetime
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
-# import keras.models as kr
-# import sklearn.preprocessing as skl
+
 
 st.title('Stock Trend Predictor')
 
@@ -22,7 +22,7 @@ end = datetime.today().strftime('%Y-%m-%d')
 input_ticker = st.text_input('Enter Stock Ticker')
 
 try:
-    df = data.DataReader(input_ticker, 'yahoo', start, end)
+    df = yf.download('AAPL', start, end)
 
     scaler = MinMaxScaler(feature_range=(0,1))
     closingData = df.filter(['Close'])
