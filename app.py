@@ -1,11 +1,9 @@
 
 import math
-import requests
 import numpy as np
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-import pandas_datareader as data
 import yfinance as yf
 from datetime import datetime
 from keras.models import load_model
@@ -29,7 +27,7 @@ try:
     dataset = closingData.values
 
     # Describe Raw Data
-    st.subheader('Stock Data from 2016 - 2022')
+    st.subheader('Stock Data from 2016 - 2023')
     st.write(df.describe())
 
     #####################################
