@@ -20,7 +20,7 @@ end = datetime.today().strftime('%Y-%m-%d')
 input_ticker = st.text_input('Enter Stock Ticker')
 
 try:
-    df = yf.download('AAPL', start, end)
+    df = yf.download(input_ticker, start, end)
 
     scaler = MinMaxScaler(feature_range=(0,1))
     closingData = df.filter(['Close'])
