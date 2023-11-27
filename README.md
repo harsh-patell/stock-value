@@ -1,4 +1,4 @@
-# LSTM Stock Predictor
+# StockValue
 A stock predictor application trained with an LSTM model for user-inputted tickers. It utilizes time series forecasting with the sliding window method to predict closing stock prices. 
 The app is deployed on Streamlit, with visualizations through Matplotlib.
 
